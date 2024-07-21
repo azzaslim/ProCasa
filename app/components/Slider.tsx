@@ -1,31 +1,37 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Carousel } from 'bootstrap'; // Importez le Carousel depuis Bootstrap
- const Slider = () => {
-  /*useEffect(() => {
-    // Initialisation du Carousel de Bootstrap
-    const carousel = document.querySelector('.carousel');
-    if (carousel) {
-      new window.bootstrap.Carousel(carousel, {
-        interval: 2000, // Optionnel : définir l'intervalle de défilement automatique
-      });
-    }
-  }, []); */
+import React, { useEffect, useState } from 'react';
+import 'tailwindcss/tailwind.css';
+
+const Slider: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slides = [
+    "/assets/img/slide-1.jpg",
+    "/assets/img/house2.jpg",
+    "/assets/img/slide-3.jpg"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   return (
-    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img className="d-block w-100" src="../assets/img/slide-1.jpg" alt="First slide" />
-        </div>
-        <div className="carousel-item">
-          <img className="d-block w-100" src="../assets/img/slide-2.jpg" alt="Second slide" />
-        </div>
-        <div className="carousel-item">
-          <img className="d-block w-100" src="../assets/img/slide-3.jpg" alt="Third slide" />
-        </div>
+    <div className="relative h-screen w-screen">
+      <div className="absolute inset-0 overflow-hidden">
+        {slides.map((slide, index) => (
+          <img
+            key={index}
+            src={slide}
+            alt={`Slide ${index}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              index === currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
