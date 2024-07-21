@@ -1,11 +1,14 @@
 import React from 'react'
+import Navbar from '../components/navbar'
+import Profile from '../components/Profile'
 
-const Profile = () => {
+const myProfile = () => {
   return (
     <div>
-      <h1>Profile</h1>
+    <Navbar/>
+    <Profile/>
     </div>
   )
 }
 
-export default Profile
+export default myProfile
