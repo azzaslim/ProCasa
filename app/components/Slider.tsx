@@ -10,6 +10,8 @@ const Slider: React.FC = () => {
     "/assets/img/house2.jpg",
     "/assets/img/slide-3.jpg"
   ];
+  const description=['Vous voulez vendre, louer ou acheter un appartement, terrain ou une maison? Déposer et consulter gratuitement nos annonces immobilières partout en Tunisie.','ProCasa et la meilleur adresse','Trouvez et comparez les prix des meilleures propriétés en vente issues de nos agences'];
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,6 +35,13 @@ const Slider: React.FC = () => {
           />
         ))}
       </div>
+       {description.map((description, index) => (
+        <h1
+          key={index}
+          className={ `text-center font-bold		text-white text-4xl	 line-clamp-3	font-mono duration-1000 absolute inset-0 flex items-center justify-center ${index === currentIndex ? 'opacity-120' : 'opacity-0'}`}
+         
+        > {description}</h1>
+      ))}
     </div>
   );
 };
