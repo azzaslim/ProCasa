@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import { useState } from 'react';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
@@ -7,7 +8,6 @@ import Navbar from "../components/navbar";
 
 const cities = ['Sousse', 'Sfax', 'Hammamet', 'Sidi Bouzid', 'Tunis', 'Monastir', 'Nabeul'];
 const roomsOptions = ['S+0', 'S+1', 'S+2', 'S+3', 'S+4', 'S+5'];
-const furnishedOptions = ['Meublé', 'Non meublé'];
 
 const properties = [
   {
@@ -292,23 +292,28 @@ const properties = [
   }
 ];
 
+
 export default function Example() {
   const [selectedCity, setSelectedCity] = useState('City');
   const [selectedRooms, setSelectedRooms] = useState('Rooms');
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [selectedFurnished, setSelectedFurnished] = useState('Type de meuble');
 
-  const handleCityChange = (value) => setSelectedCity(value || 'City');
-  const handleRoomsChange = (value) => setSelectedRooms(value || 'Rooms');
-  const handleFurnishedChange = (value) => setSelectedFurnished(value || 'Type de meuble');
-  const handlePropertyClick = (property) => setSelectedProperty(property);
+  const handleCityChange = (value) => {
+    setSelectedCity(value === '' ? 'City' : value);
+  };
+
+  const handleRoomsChange = (value) => {
+    setSelectedRooms(value === '' ? 'Rooms' : value);
+  };
+
+  const handlePropertyClick = (property) => {
+    setSelectedProperty(property);
+  };
 
   const filteredProperties = properties.filter(
     property =>
       (selectedCity === 'City' || property.city === selectedCity) &&
-      (selectedRooms === 'Rooms' || property.rooms === selectedRooms) &&
-      (selectedFurnished === 'Type de meuble' || 
-        (selectedFurnished === 'Meublé' ? property.furnished === true : property.furnished === false))
+      (selectedRooms === 'Rooms' || property.rooms === selectedRooms)
   );
 
   return (
@@ -327,52 +332,29 @@ export default function Example() {
                 </span>
               </ListboxButton>
 
-              <ListboxOptions className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                <ListboxOption key="" value="" className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
+              <ListboxOptions
+                className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              >
+                <ListboxOption
+                  key=""
+                  value=""
+                  className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100"
+                >
                   <div className="flex items-center">
                     <span className="block truncate">Aucune sélection</span>
                   </div>
                 </ListboxOption>
                 {cities.map((city) => (
-                  <ListboxOption key={city} value={city} className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
+                  <ListboxOption
+                    key={city}
+                    value={city}
+                    className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100"
+                  >
                     <div className="flex items-center">
                       <span className="block truncate">{city}</span>
                     </div>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
                       {city === selectedCity && <CheckIcon aria-hidden="true" className="h-5 w-5" />}
-                    </span>
-                  </ListboxOption>
-                ))}
-              </ListboxOptions>
-            </div>
-          </Listbox>
-        </div>
-
-        <div className="w-64">
-          <Listbox value={selectedFurnished} onChange={handleFurnishedChange} className="w-full">
-            <div className="relative mt-2">
-              <ListboxButton className="relative w-full cursor-pointer rounded-md bg-white py-2 px-4 text-left text-gray-900 shadow-md ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm">
-                <span className="flex items-center">
-                  <span className="block truncate">{selectedFurnished === 'Type de meuble' ? 'Sélectionnez le type de meuble' : selectedFurnished}</span>
-                </span>
-                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                  <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
-                </span>
-              </ListboxButton>
-
-              <ListboxOptions className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                <ListboxOption key="" value="" className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
-                  <div className="flex items-center">
-                    <span className="block truncate">Aucune sélection</span>
-                  </div>
-                </ListboxOption>
-                {furnishedOptions.map((option) => (
-                  <ListboxOption key={option} value={option} className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
-                    <div className="flex items-center">
-                      <span className="block truncate">{option}</span>
-                    </div>
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                      {option === selectedFurnished && <CheckIcon aria-hidden="true" className="h-5 w-5" />}
                     </span>
                   </ListboxOption>
                 ))}
@@ -393,14 +375,24 @@ export default function Example() {
                 </span>
               </ListboxButton>
 
-              <ListboxOptions className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                <ListboxOption key="" value="" className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
+              <ListboxOptions
+                className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              >
+                <ListboxOption
+                  key=""
+                  value=""
+                  className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100"
+                >
                   <div className="flex items-center">
                     <span className="block truncate">Aucune sélection</span>
                   </div>
                 </ListboxOption>
                 {roomsOptions.map((rooms) => (
-                  <ListboxOption key={rooms} value={rooms} className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100">
+                  <ListboxOption
+                    key={rooms}
+                    value={rooms}
+                    className="group relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-gray-100"
+                  >
                     <div className="flex items-center">
                       <span className="block truncate">{rooms}</span>
                     </div>
@@ -416,25 +408,77 @@ export default function Example() {
       </div>
 
       <div className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProperties.map((property) => (
-              <div key={property.id} className="group relative cursor-pointer" onClick={() => handlePropertyClick(property)}>
-                <div className="relative h-72 overflow-hidden rounded-lg">
-                  <img src={property.imageSrc} alt={property.imageAlt} className="h-full w-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-105" />
-                </div>
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold">{property.title}</h3>
-                  <p className="text-gray-500">{property.city}</p>
-                  <p className="text-gray-500">{property.price} DT</p>
-                  <p className="text-gray-500">{property.rooms}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          <h2 className="sr-only">Properties</h2>
+
+          {filteredProperties.length > 0 ? (
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              {filteredProperties.map((property) => (
+                <a
+                  key={property.id}
+                  href={property.href}
+                  className="group cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default anchor behavior
+                    handlePropertyClick(property);
+                  }}
+                >
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 h-64">
+                    <img
+                      alt={property.imageAlt}
+                      src={property.imageSrc}
+                      className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-sm text-gray-700">{property.name}</h3>
+                  <p className="mt-1 text-lg font-semibold text-gray-900">{property.city}</p>
+                  <p className="mt-1 text-sm text-gray-500">{property.address}</p>
+                  <p className="mt-1 text-lg font-medium text-gray-900">{property.price}</p>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">
+              <p>No results for this city and this room number.</p>
+            </div>
+          )}
         </div>
       </div>
-      
+
+      {selectedProperty && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center w-96 p-4">
+          <div className="relative bg-white rounded-lg shadow-lg w-full max-w-lg">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setSelectedProperty(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <img
+              alt={selectedProperty.imageAlt}
+              src={selectedProperty.imageSrc}
+              className="h-64 w-96 w-full object-cover object-center rounded-t-lg"
+            />
+            <div className="p-6">
+              <h3 className="text-lg font-semibold text-gray-900">{selectedProperty.name}</h3>
+              <p className="mt-1 text-lg text-gray-700">{selectedProperty.city}</p>
+              <p className="mt-1 text-sm text-gray-500">{selectedProperty.address}</p>
+              <p className="mt-1 text-lg font-medium text-gray-900">{selectedProperty.price}</p>
+              <p className="mt-2 text-sm text-gray-600">{selectedProperty.description}</p>
+              <a href="/" className=" loginbutton object-center ml-14 mt-16">
+                {" "}
+                <button className="bg-black  bg-opacity-75 text-white hover:bg-red-400 text-white-700 font-semibold hover:text-white py-2 px-4 border border-white border-transparent rounded">
+                  Reserve Now
+                </button>
+              </a>
+            </div>
+           
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
