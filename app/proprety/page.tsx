@@ -467,7 +467,7 @@ export default function Example() {
               <p className="mt-1 text-sm text-gray-500">{selectedProperty.address}</p>
               <p className="mt-1 text-lg font-medium text-gray-900">{selectedProperty.price}</p>
               <p className="mt-2 text-sm text-gray-600">{selectedProperty.description}</p>
-              <a href="/" className=" loginbutton object-center ml-14 mt-16">
+              <a href="#" className=" loginbutton object-center ml-14 mt-16">
                 {" "}
                 <button className="bg-black  bg-opacity-75 text-white hover:bg-red-400 text-white-700 font-semibold hover:text-white py-2 px-4 border border-white border-transparent rounded">
                   Reserve Now

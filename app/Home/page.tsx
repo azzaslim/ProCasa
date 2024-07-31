@@ -10,7 +10,6 @@ const page = () => {
       <div>
           <Navbar/>
           <Slider/>
-          <Dashboard/>
           <Footer/>
           
     </div>

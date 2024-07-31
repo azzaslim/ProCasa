@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react';
 
 const Example: React.FC = () => {
   const paragraphe = [
-    ', our mission is to provide exceptional real estate services that exceed our clients expectations. We are dedicated to helping you find the perfect home, whether you re buying, selling, or renting. Our team of experienced professionals is committed to making the process as smooth and stress-free as possible.',
+    'Our mission is to provide exceptional real estate services that exceed our clients expectations. We are dedicated to helping you find the perfect home, whether you re buying, selling, or renting. Our team of experienced professionals is committed to making the process as smooth and stress-free as possible.',
     ' ProCasa Realty is a leading real estate agency with a passion for helping people achieve their property goals. With years of experience in the industry, we have built a reputation for trust, integrity, and excellence. Our agents are knowledgeable, approachable, and always ready to go the extra mile to ensure your satisfaction.',
-    ' a wide range of real estate services tailored to meet the unique needs of our clients. From property listings and market analysis to personalized home search assistance and negotiation support, we are here to guide you every step of the way. Our comprehensive services are designed to make your real estate journey seamless and enjoyable.',
+    ' We offer a wide range of real estate services tailored to meet the unique needs of our clients. From property listings and market analysis to personalized home search assistance and negotiation support, we are here to guide you every step of the way. Our comprehensive services are designed to make your real estate journey seamless and enjoyable.',
     ' Choosing ProCasa Realty means choosing a partner who is dedicated to your success. We pride ourselves on our deep understanding of the real estate market and our commitment to delivering outstanding results. Our personalized approach ensures that we understand your needs and work tirelessly to meet them. Trust us to be your guide in the world of real estate.',
     ' Our vision is to be the most trusted and respected real estate agency in the region. We aim to set the standard for excellence in the industry by providing unparalleled service, building lasting relationships with our clients, and contributing positively to our community. At ProCasa Realty, your dreams are our mission.'
   ];
-  const title = ['Our Mission At ProCasa Realty','Who We Are','What We Do We offer','Why Choose Us','Our Vision'];
+  const title = ['Our Mission ','Who We Are','What We Do ','Why Choose Us','Our Vision'];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -34,7 +34,7 @@ const Example: React.FC = () => {
 
             {title.map((text, index) => (
             <h1 key={index}
-                    className={` absolute text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl text-center transition-opacity duration-1000 ${
+                    className={`  absolute text-4xl font-bold tracking-tight  ml-36 text-gray-900 sm:text-6xl  transition-opacity duration-1000 ${
                       index === currentIndex ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
@@ -127,8 +127,8 @@ const Example: React.FC = () => {
 <br /><br /><br />
 <div>
                 <a
-                  href="#"
-                  className="inline-block rounded-md border border-transparent bg-black px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
+                  href="/proprety"
+                  className="inline-block  mt-4 rounded-md border border-transparent ml-44 bg-black px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
                   >
                   View offers
                 </a>
